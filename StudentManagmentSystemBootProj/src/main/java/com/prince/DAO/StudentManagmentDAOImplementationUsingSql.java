@@ -13,36 +13,32 @@ import org.springframework.stereotype.Repository;
 
 import com.prince.model.StudentBean;
 
-@Repository("oracleDB")
-public class StudentManagmentDAOImp implements IStudentManagmentDAO 
-{
-	private static final String INSERT_Q = "insert into dummyStudent values (dummy_student_seq.nextval,?,?,?,?)";
-	private static final String SELECT_Q = "select * from dummyStudent";
-	private static final String SELECT_Q_BY_ID = "select * from dummyStudent where id = ?";
-	private static final String Delete_Q_BY_ID = "delete from dummyStudent where id = ?";
-	
+@Repository("mysqlDB")
+public class StudentManagmentDAOImplementationUsingSql implements IStudentManagmentDAO {
+
+	private static final String INSERT_Q = "INSERT INTO dummyStudent (id, name, totalMarks, percentage, result)  VALUES (NULL, ?, ?, ?, ?)";
+	private static final String SELECT_Q = "SELECT * FROM dummyStudent";
+	private static final String SELECT_Q_BY_ID = "SELECT * FROM dummyStudent WHERE id = ?";
+	private static final String Delete_Q_BY_ID = "DELETE FROM dummyStudent WHERE id = ?";
+
 	@Autowired
 	DataSource ds;
-	
+
 	@Override
 	public Integer insertStudent(StudentBean s) throws Exception {
 		int k = 0;
-		
-		try(Connection con = ds.getConnection(); 
-				PreparedStatement ps = con.prepareStatement(INSERT_Q))
-		{
+
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(INSERT_Q)) {
 			ps.setString(1, s.getName());
 			ps.setInt(2, s.getTotalMarks());
 			ps.setFloat(3, s.getPercentage());
 			ps.setString(4, s.getResult());
-			
+
 			k = ps.executeUpdate();
-		} 
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			throw e;
 		}
-		
+
 		return k;
 	}
 
@@ -69,8 +65,7 @@ public class StudentManagmentDAOImp implements IStudentManagmentDAO
 		{
 			throw e;
 		}
-		return ls;
-	}
+		return ls;	}
 
 	@Override
 	public StudentBean fetchStudentById(Integer id) throws Exception {
@@ -118,4 +113,5 @@ public class StudentManagmentDAOImp implements IStudentManagmentDAO
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

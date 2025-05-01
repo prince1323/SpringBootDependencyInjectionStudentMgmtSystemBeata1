@@ -3,9 +3,11 @@ package com.prince.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prince.DAO.IStudentManagmentDAO;
 import com.prince.DAO.StudentManagmentDAOImp;
 import com.prince.model.StudentBean;
 
@@ -14,7 +16,8 @@ import com.prince.model.StudentBean;
 public class StudentManagmentServiceImp implements IStudentManagmentService 
 {
 	@Autowired
-	StudentManagmentDAOImp stdDao;
+	@Qualifier("mysqlDB")
+	IStudentManagmentDAO stdDao;
 	
 	@Override
 	public Integer putStudent(StudentBean s) throws Exception {
