@@ -9,11 +9,13 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import com.prince.model.StudentBean;
 
 @Repository("mysqlDB")
+@Profile({"dev","test"})
 public class StudentManagmentDAOImplementationUsingSql implements IStudentManagmentDAO {
 
 	private static final String INSERT_Q = "INSERT INTO dummyStudent (id, name, totalMarks, percentage, result)  VALUES (NULL, ?, ?, ?, ?)";

@@ -16,7 +16,7 @@ import com.prince.model.StudentBean;
 public class StudentManagmentServiceImp implements IStudentManagmentService 
 {
 	@Autowired
-	@Qualifier("mysqlDB")
+//	@Qualifier("mysqlDB")
 	IStudentManagmentDAO stdDao;
 	
 	@Override

@@ -9,11 +9,13 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import com.prince.model.StudentBean;
 
 @Repository("oracleDB")
+@Profile({"uat","prod"})
 public class StudentManagmentDAOImp implements IStudentManagmentDAO 
 {
 	private static final String INSERT_Q = "insert into dummyStudent values (dummy_student_seq.nextval,?,?,?,?)";
